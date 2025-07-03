@@ -11,7 +11,6 @@ def read_index():
     return {"name":"Joseph",
              "surname":"Munemo",
             "MY_PROJECT":MY_PROJECT,
-            "API_KEY":API_KEY
            }
    # return {"MY_PROJECT":MY_PROJECT}
    # return {"API_KEY":API_KEY}
