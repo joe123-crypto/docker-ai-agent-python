@@ -9,6 +9,7 @@ API_KEY = os.getenv("API_KEY")
 @app.get("/")
 def read_index():
     return {"name":"Joseph",
+            "API_Key":"abc123",
              "surname":"Munemo",
             "MY_PROJECT":MY_PROJECT,
            }
