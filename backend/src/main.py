@@ -12,7 +12,7 @@ if not API_KEY:
 @app.get("/")
 def read_index():
     return {"name":"Joseph",
-            "API_Key":"abc123",
+            "API_Key":API_KEY,
              "surname":"Munemo",
             "MY_PROJECT":MY_PROJECT,
            }
