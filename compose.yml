@@ -9,7 +9,7 @@ services:
     environment:
       - PORT=8000
       - MY_PROJECT="Hello World"
-      #- DATABASE_URL=postgresql://dbuser:db-password@db_service:5432/mydb
+      - DATABASE_URL=postgresql://dbuser:db-password@db_service:5432/mydb
       #- API_KEY=your-api-key-here
     env_file:
       - .env.sample
