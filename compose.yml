@@ -9,7 +9,7 @@ services:
     environment:
       - PORT=8000
       - MY_PROJECT="Hello World"
-      #- DATABASE_URL=postgresql://postgres:HgIbWNnHHrieVcwOHPFikRvvyxuslkYL@postgres-sqix.railway.internal:5432/railway
+      #- DATABASE_URL=postgresql://dbuser:db-password@db_service:5432/mydb
       #- API_KEY=your-api-key-here
     env_file:
       - .env.sample
