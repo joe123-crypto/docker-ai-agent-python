@@ -3,13 +3,20 @@
   "build": {
     "builder": "DOCKERFILE",
     "dockerfilePath": "backend/Dockerfile",
+    "variables":[
+      {
+        "name":"DATABASE_URL",
+        "description":"Database URL",
+        "value": "${{ env.DATABASE_URL }}"
+      }
+    ],
     "watchPatterns": [
         "src/**",
         "requirements.txt",
         "railway.json",
         "Dockerfile"
      ]
-    },
+   },
   "deploy": {
     "startCommand": "uvicorn main:app --host 0.0.0.0 --port 8000"
     }

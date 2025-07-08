@@ -9,10 +9,15 @@ services:
     environment:
       - PORT=8000
       - MY_PROJECT="Hello World"
+      #- DATABASE_URL=postgresql://dbuser:db-password@db_service:5432/mydb
+      #- API_KEY=your-api-key-here
     env_file:
       - .env.sample
     volumes:
       - ./backend/src:/app
+    depends_on:
+      db_service:
+        condition: service_healthy
     develop:
       watch:
         - action: rebuild
@@ -21,13 +26,22 @@ services:
           path: ./backend/src
         - action: rebuild
           path: ./backend/Dockerfile
-  static_html:
-    build:
-      context: ./static_html
-      dockerfile: static.Dockerfile
+
+  db_service:
+    image: postgres:17.5
     ports:
-      - "8000:8080"
-      - "3000:8080"
-    command: python -m http.server 8080
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=dbuser
+      - POSTGRES_PASSWORD=db-password
+      - POSTGRES_DB=mydb
     volumes:
-      - ./static_html/src:/app
+      - dc_managed_db_volume:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dbuser -d mydb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  dc_managed_db_volume:

@@ -2,6 +2,9 @@
 
 FROM python:3.11-slim
 
+#curl -X post -d '{"message":"hello world"}' -H Content-Type:application.json http:host.docker.internal:8080/api/chats/
+RUN apt-get update && apt-get install -y curl
+
 RUN python -m venv /opt/venv/
 
 ENV PATH=/opt/venv/bin:$PATH
