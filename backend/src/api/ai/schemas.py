@@ -7,3 +7,7 @@ class EmailMessageSchema(BaseModel):
     subject:str
     contents:str
     invalid_request: bool | None = Field(default=None)
+
+class SupervisorMessageSchema(BaseModel):
+    content:str
+    

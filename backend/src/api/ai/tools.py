@@ -1,6 +1,19 @@
 from langchain_core.tools import tool
 from api.myemailer.sender import send_email
 from api.myemailer.inbox_reader import read_inbox
+from api.ai.services import generate_email_messages
+
+@tool
+def research_email(query:str):
+    """
+    Perform research based on the query 
+
+    Arguments:
+    -query: str - Topic of research
+    """
+    response = generate_email_messages(query)
+    msg = f"Subject {response.subject}:\nBody: {response.contents}"
+    return msg
 
 @tool
 def send_me_email(subject:str,content:str) -> str:
@@ -8,8 +21,8 @@ def send_me_email(subject:str,content:str) -> str:
     Send an email to myself with a subject and content
 
     Arguments:
-        - subject: str - Text subject of the email  
-        - content: str - Text body content of the email
+        - subject: str - Text subject of the email. If not provided, generate a subtitle based on the user's request.  
+        - content: str - Text body content of the email. If not provided, generate a suitable body based on the user's request.
     """
     try:
         send_email(subject=subject,content=content)

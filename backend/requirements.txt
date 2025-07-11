@@ -4,4 +4,7 @@ requests
 sqlmodel
 psycopg2-binary
 langchain
+langgraph
+langgraph-supervisor 
 langchain_google_genai
+langchain_openai

@@ -8,11 +8,11 @@ def generate_email_messages(query:str) -> EmailMessageSchema:
     messages = [
         (
             "system",
-            "You are a helpful assistant for research and composing plaintext emails. Do not use markdown in your response only plaintext.",
+            "You are a helpful assistant for research and composing plaintext emails.",
         ),
         (
             "human",
-            f"{query}. Do not use markdown in your response only plaintext",
+            f"{query}.",
         ),
         ]
     return llm.invoke(messages)

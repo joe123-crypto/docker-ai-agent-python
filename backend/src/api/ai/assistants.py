@@ -1,4 +1,4 @@
-from api.ai.llms import get_gemni_llm
+from api.ai.llms import get_gemni_llm,get_openai_llm
 #from api.ai.schemas import EmailMessageSchema
 
 from api.ai.tools import (
@@ -17,12 +17,26 @@ def email_assistant(query:str):
     messages = [
         (
             "system",
-            "You are a helpful assistant for research and composing plaintext emails. Do not use markdown in your response only plaintext.",
+            "You are a helpful assistant for managing my email in inbox",
         ),
         (
             "human",
-            f"{query}. Do not use markdown in your response only plaintext",
+            f"{query}"
         ),
         ]
     response = llm.invoke(messages)
+    print(response)
+    messages.append(response)
+    if hasattr(response, "tool_calls") and response.tool_calls:
+        for tool_call in response.tool_calls:
+            tool_name = tool_call.get("name")
+            tool_func = EMAIL_TOOLS.get(tool_name)
+            tool_args = tool_call.get("args")
+            if not tool_func:
+                continue
+            tool_result = tool_func.invoke(tool_args)
+            messages.append(tool_result)
+            #print(messages)
+        final_response = llm.invoke(messages)
+        return final_response
     return response
