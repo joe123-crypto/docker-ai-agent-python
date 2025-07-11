@@ -17,7 +17,7 @@ EMAIL_TOOLS_LIST = [
 ]
 
 def get_email_agent():
-    model = get_gemni_llm()
+    model = get_openai_llm()
     agent = create_react_agent(
         model=model,
         tools=EMAIL_TOOLS_LIST,
@@ -31,7 +31,7 @@ def get_email_agent():
     return agent
 
 def get_research_agent():
-    model = get_gemni_llm(model="gemini-1.5-pro")
+    model = get_openai_llm
     agent = create_react_agent(
         model=model,
         tools=[research_email],
@@ -41,7 +41,7 @@ def get_research_agent():
     return agent
 #supe.invoke({"messages":[{"role":"user","content":"Find out how to make a latte and them email me the results"}]})
 def get_supervisor():
-    llm = get_gemni_llm(model="gemini-2.5-pro")
+    llm = get_openai_llm
     email_agent = get_email_agent()
     research_agent = get_research_agent()
     prompt = (
