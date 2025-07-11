@@ -41,7 +41,7 @@ def get_research_agent():
     return agent
 #supe.invoke({"messages":[{"role":"user","content":"Find out how to make a latte and them email me the results"}]})
 def get_supervisor():
-    llm = get_gemni_llm(model="gemni-2.0-flash-lite")
+    llm = get_gemni_llm()
     email_agent = get_email_agent()
     research_agent = get_research_agent()
     prompt = (
