@@ -11,7 +11,7 @@ ENV PATH=/opt/venv/bin:$PATH
 
 WORKDIR /app
 
-CMD ["docker","model","pull","ai/smollm2:135M-Q2-K"]
+#CMD ["docker","model","pull","ai/smollm2:135M-Q2-K"]
 
 COPY requirements.txt /tmp/requirements.txt
 
